@@ -82,7 +82,7 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "IdAlumno: " + idAlumno + "\nApellido: " + apellido + "\nNombre: " + nombre + "\nFecha de Nacimiento: " + fechaNacimiento + "\nActivo: " + activo ;
+        return idAlumno + ", " + apellido + ", " + nombre + ", " + fechaNacimiento + ", " + activo ;
     }
    
     public String obtenerAlumnoCombo(){

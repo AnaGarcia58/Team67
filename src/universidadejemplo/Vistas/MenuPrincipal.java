@@ -25,7 +25,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Consultas1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 800));
 
         escritorio.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         escritorio.setPreferredSize(new java.awt.Dimension(805, 803));
@@ -83,6 +82,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuItem4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenuItem4.setText("Manipulación de Notas");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
         jMenuBar1.add(jMenu3);
@@ -184,6 +188,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void Consultas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Consultas1MouseClicked
         dispose();
     }//GEN-LAST:event_Consultas1MouseClicked
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        JInternalFrameCargaDeNota internalView =new JInternalFrameCargaDeNota();
+        internalView.setVisible(true);
+        escritorio.add(internalView);
+        escritorio.moveToFront(internalView);
+        int x = (escritorio.getWidth() - internalView.getWidth()) / 2; // Divide en 2 el ancho del escritorio menos el ancho de la vistaAlumno
+        int y = (escritorio.getHeight() - internalView.getHeight()) / 2;
+        internalView.setLocation(x, y);// centra la vista Alumno
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

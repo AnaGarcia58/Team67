@@ -314,6 +314,8 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         JtfCodigo.setEnabled(false);
         estadoBotones(true);
         JbBuscar.setEnabled(false);
+        JrbEstado.setEnabled(false);
+        
 
     }//GEN-LAST:event_JbNuevoActionPerformed
 
