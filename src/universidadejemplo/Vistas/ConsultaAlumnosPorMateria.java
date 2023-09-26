@@ -1,5 +1,6 @@
 package universidadejemplo.Vistas;
 
+import java.awt.Font;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
         materiaData = new MateriaData();
         inscripcionData = new InscripcionData();
         cargarCombo();
-        
+
     }
 
     /**
@@ -44,21 +45,27 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTAlumno = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+
+        setTitle("Consulta Alumnos por Materias");
+        setMinimumSize(new java.awt.Dimension(500, 500));
 
         jDesktopPane1.setBackground(new java.awt.Color(0, 102, 102));
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Listado de alumnos por materias");
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jLabel2.setText("Selecciona una materia");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Seleccione una materia:");
 
+        jCMaterias.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jCMaterias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCMateriasActionPerformed(evt);
             }
         });
 
+        jTAlumno.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jTAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -67,10 +74,11 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
 
             }
         ));
+        jTAlumno.setRowHeight(30);
         jScrollPane1.setViewportView(jTAlumno);
 
-        jBSalir.setBackground(new java.awt.Color(0, 153, 153));
-        jBSalir.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        jBSalir.setBackground(new java.awt.Color(204, 204, 204));
+        jBSalir.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +91,7 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayer(jCMaterias, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jBSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -90,15 +99,19 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jCMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                            .addGap(35, 35, 35)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel2)
-                        .addGap(64, 64, 64)
-                        .addComponent(jCMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(30, 30, 30)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,22 +120,24 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
                         .addGap(43, 43, 43))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(88, 88, 88))))
+                        .addGap(56, 56, 56))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jCMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jBSalir)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,20 +155,15 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-          this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jCMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCMateriasActionPerformed
-        borrarTabla();        
-        Materia materiaSeleccionada=(Materia)jCMaterias.getSelectedItem();
+        borrarTabla();
+        Materia materiaSeleccionada = (Materia) jCMaterias.getSelectedItem();
         jCMaterias.getSelectedItem();
-        
-        List<Alumno>listaAlumnos=inscripcionData.obtenerAlumnosPorMateria(materiaSeleccionada.getIdMateria());
-        
+        List<Alumno> listaAlumnos = inscripcionData.obtenerAlumnosPorMateria(materiaSeleccionada.getIdMateria());
         mostrarDatosTabla(listaAlumnos);
-       
-
-
     }//GEN-LAST:event_jCMateriasActionPerformed
 
 
@@ -164,6 +174,7 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTAlumno;
     // End of variables declaration//GEN-END:variables
 
@@ -172,40 +183,32 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
         modelo.addColumn("Dni");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
+        jTAlumno.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 18));
         jTAlumno.setModel(modelo);
     }
 
     private void cargarCombo() {
-        
         jCMaterias.removeAllItems();
+        jCMaterias.addItem(null);
         ArrayList<Materia> materias = materiaData.listarMaterias();
-
         for (Materia materia : materias) {
             jCMaterias.addItem(materia);
         }
-        
-        
-
     }
 
-    private void mostrarDatosTabla(List<Alumno>list) {
+    private void mostrarDatosTabla(List<Alumno> list) {
         borrarTabla();
         Materia materia = (Materia) jCMaterias.getSelectedItem();
         List<Alumno> alumnos = inscripcionData.obtenerAlumnosPorMateria(materia.getIdMateria());
-        
         for (Alumno alumno : alumnos) {
-
             modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
         }
     }
 
     private void borrarTabla() {
-
         int filas = jTAlumno.getRowCount() - 1;
         for (; filas >= 0; filas--) {
             modelo.removeRow(filas);
         }
-
     }
 }
-

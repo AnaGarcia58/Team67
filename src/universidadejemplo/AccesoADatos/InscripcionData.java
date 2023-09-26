@@ -14,9 +14,7 @@ import universidadejemplo.Entidades.Materia;
 public class InscripcionData {
 
     private Connection con;
-    private MateriaData matData;
-    private AlumnoData aluData;
-
+   
     public InscripcionData() {
         this.con = Conexion.getConexion();
     }
@@ -76,7 +74,7 @@ public class InscripcionData {
     }
 
     public List<Materia> obtenerMateriasCursadas(int id) {
-        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia WHERE inscripcion.idMateria=materia.idMateria AND inscripcion.idAlumno=?;";
+        String sql = "SELECT DISTINCT inscripcion.idMateria, nombre, año FROM inscripcion, materia WHERE inscripcion.idMateria=materia.idMateria AND inscripcion.idAlumno=? and inscripcion.estado = 1";
         List<Materia> materias = new ArrayList<Materia>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -99,7 +97,8 @@ public class InscripcionData {
 
     public List<Materia> obtenerMateriasNoCursadas(int id) {
         List<Materia> materias = new ArrayList<>();
-        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia WHERE materia.estado=0";
+        String sql = "SELECT m.idMateria, m.nombre, m.año FROM materia m WHERE idMateria "
+                + "NOT IN(SELECT idMateria FROM inscripcion i WHERE idAlumno = ? and i.estado = 1)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -155,7 +154,7 @@ public class InscripcionData {
 
     public List<Alumno> obtenerAlumnosPorMateria(int idMateria) {
         List<Alumno> alumnos = new ArrayList<>();
-        String sql = "SELECT a.* FROM inscripcion i JOIN alumno a ON i.idAlumno=a.idAlumno JOIN materia m ON i.idMateria = m.idMateria WHERE i.idMateria = ?";
+        String sql = "SELECT DISTINCT a.* FROM inscripcion i JOIN alumno a ON i.idAlumno=a.idAlumno JOIN materia m ON i.idMateria = m.idMateria WHERE i.idMateria = ?";
         try {
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setInt(1, idMateria);
@@ -163,6 +162,7 @@ public class InscripcionData {
             while (resultSet.next()) {
                 Alumno alumno = new Alumno();
                 alumno.setIdAlumno(resultSet.getInt("idAlumno"));
+                alumno.setDni(resultSet.getInt("dni"));
                 alumno.setNombre(resultSet.getString("nombre"));
                 alumno.setApellido(resultSet.getString("apellido"));
                 alumno.setFechaNacimiento(resultSet.getDate("FechaNacimiento").toLocalDate());
