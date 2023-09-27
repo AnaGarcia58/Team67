@@ -4,7 +4,6 @@
  */
 package universidadejemplo.Vistas;
 
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -17,9 +16,10 @@ import universidadejemplo.Entidades.Alumno;
  * @author estudiante
  */
 public class GestionDeAlumnos extends javax.swing.JInternalFrame {
+
     private AlumnoData alumData = new AlumnoData();
     private Alumno alumnoEncontrado = null;
-    
+
     public GestionDeAlumnos() {
         initComponents();
         limpiarCampos();
@@ -27,7 +27,6 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         desactivarBotones();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -256,12 +255,12 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -274,6 +273,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         try {
+            
             int dni = Integer.parseInt(jTDni.getText());
             alumnoEncontrado = alumData.buscarAlumnoPorDni(dni);
             if (alumnoEncontrado != null) {
@@ -309,47 +309,53 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        if (alumnoEncontrado != null){
+        if (alumnoEncontrado != null) {
             alumData.eliminarAlumno(alumnoEncontrado.getIdAlumno());
             alumnoEncontrado = null;
             //limpiarCampos();
             JOptionPane.showMessageDialog(this, "Alumno eliminado");
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno");
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         try {
-            int dni = Integer.parseInt(jTDni.getText());
-            String apellido = jTApellido.getText();
-            String nombre = jTNombre.getText();
-            if (nombre.isEmpty() || apellido.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
-                return;
-            }
-            java.util.Date fecha = jDateCalendario.getDate();
-            LocalDate fechaN = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            boolean estado = jREstado.isSelected();
+            String dniS = jTDni.getText();
+            if (dniS.length() >= 7 && dniS.length() < 9) {
 
-            if (alumnoEncontrado == null) {
-                alumnoEncontrado = new Alumno(dni, apellido, nombre, fechaN, estado);
-                alumData.guardarAlumno(alumnoEncontrado);
-            } else if ((alumnoEncontrado != null) && (alumnoEncontrado.isActivo() == true)) {
-                alumnoEncontrado.setDni(dni);
-                alumnoEncontrado.setApellido(apellido);
-                alumnoEncontrado.setNombre(nombre);
-                alumnoEncontrado.setFechaNacimiento(fechaN);
-                alumData.modificarAlumno(alumnoEncontrado);
-                JOptionPane.showMessageDialog(this, "Alumno Modificado");
+                int dni = Integer.parseInt(jTDni.getText());
+                String apellido = jTApellido.getText();
+                String nombre = jTNombre.getText();
+                if (nombre.isEmpty() || apellido.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+                    return;
+                }
+                java.util.Date fecha = jDateCalendario.getDate();
+                LocalDate fechaN = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                boolean estado = jREstado.isSelected();
 
-            } else if ((alumnoEncontrado != null) && (alumnoEncontrado.isActivo() == false)) {
-                alumnoEncontrado.setActivo(true);
-                alumData.modificarAlumno(alumnoEncontrado);
-                jLBaja.setVisible(false);
-                jREstado.setEnabled(false);
-                JOptionPane.showMessageDialog(this, "Alumno dado de alta");
+                if (alumnoEncontrado == null) {
+                    alumnoEncontrado = new Alumno(dni, apellido, nombre, fechaN, estado);
+                    alumData.guardarAlumno(alumnoEncontrado);
+                } else if ((alumnoEncontrado != null) && (alumnoEncontrado.isActivo() == true)) {
+                    alumnoEncontrado.setDni(dni);
+                    alumnoEncontrado.setApellido(apellido);
+                    alumnoEncontrado.setNombre(nombre);
+                    alumnoEncontrado.setFechaNacimiento(fechaN);
+                    alumData.modificarAlumno(alumnoEncontrado);
+                    JOptionPane.showMessageDialog(this, "Alumno Modificado");
 
+                } else if ((alumnoEncontrado != null) && (alumnoEncontrado.isActivo() == false)) {
+                    alumnoEncontrado.setActivo(true);
+                    alumData.modificarAlumno(alumnoEncontrado);
+                    jLBaja.setVisible(false);
+                    jREstado.setEnabled(false);
+                    JOptionPane.showMessageDialog(this, "Alumno dado de alta");
+
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "DNI inválido");
             }
 
         } catch (NumberFormatException nfe) {

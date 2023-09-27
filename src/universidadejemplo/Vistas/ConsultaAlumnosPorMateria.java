@@ -161,7 +161,6 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
     private void jCMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCMateriasActionPerformed
         borrarTabla();
         Materia materiaSeleccionada = (Materia) jCMaterias.getSelectedItem();
-        jCMaterias.getSelectedItem();
         List<Alumno> listaAlumnos = inscripcionData.obtenerAlumnosPorMateria(materiaSeleccionada.getIdMateria());
         mostrarDatosTabla(listaAlumnos);
     }//GEN-LAST:event_jCMateriasActionPerformed
@@ -198,9 +197,7 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
 
     private void mostrarDatosTabla(List<Alumno> list) {
         borrarTabla();
-        Materia materia = (Materia) jCMaterias.getSelectedItem();
-        List<Alumno> alumnos = inscripcionData.obtenerAlumnosPorMateria(materia.getIdMateria());
-        for (Alumno alumno : alumnos) {
+        for (Alumno alumno : list) {
             modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
         }
     }
